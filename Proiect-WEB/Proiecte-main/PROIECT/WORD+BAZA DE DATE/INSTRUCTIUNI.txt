@@ -1,0 +1,4 @@
+-fisierul principal este cel de la login.php
+-se vor introduce datele de conectare,dupa care utilizatorul v-a fi redirectionat
+la admin.php sau user.php
+-se poate realiza si inregistrarea unui nou utilizator in panoul de login
