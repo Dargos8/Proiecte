@@ -1,0 +1,293 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  overflow: hidden;
+}
+
+/* ─── Titlebar ─── */
+.titlebar {
+  height: var(--titlebar-h, 30px);
+  background: #323233;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  flex-shrink: 0;
+  user-select: none;
+  position: relative;
+}
+.titlebarText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+.clock {
+  position: absolute;
+  right: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ─── Body ─── */
+.body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0; /* CRITIC: fara asta flex copiii se extind peste viewport */
+}
+
+/* ─── Desktop panels ─── */
+.desktopPanels {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ─── Mobile panels ─── */
+.mobilePanels {
+  display: none;
+}
+
+/* ─── Mobile pane (fiecare panou individual) ─── */
+.mobilePane {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-secondary, #f4f6f9); /* explicit, previne black screen */
+  width: 100%;
+}
+
+/* hidden attribute opreste display complet fara a distruge DOM-ul
+   (Leaflet nu se remonteza la fiecare switch de panou) */
+.mobilePane[hidden] {
+  display: none !important;
+}
+
+/* ─── Inspector gol ─── */
+.inspectorEmpty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px 24px;
+  text-align: center;
+}
+.inspectorEmptyIcon {
+  font-size: 48px;
+  opacity: 0.25;
+  display: block;
+}
+.inspectorEmpty p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 260px;
+}
+.inspectorEmpty strong {
+  color: var(--text-primary);
+}
+.inspectorEmptyBtn {
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.inspectorEmptyBtn:hover { opacity: 0.85; }
+.inspectorEmptyBtn:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* ─── Statusbar ─── */
+.statusbar {
+  height: var(--statusbar-h, 22px);
+  background: var(--accent-blue);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 14px;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #fff;
+}
+.statusItem { opacity: 0.9; white-space: nowrap; }
+.statusFill { flex: 1; }
+
+/* ─── Mobile bottom nav — ascuns pe desktop ─── */
+.mobileNav { display: none; }
+
+/* ─── Loading / Error ─── */
+.loadingScreen,
+.errorScreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.loadingDot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-blue);
+  border-radius: 50%;
+  animation: pulse 1s ease-in-out infinite;
+}
+.loadingText { color: var(--text-secondary); }
+.errorText   { color: var(--accent-red); }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;   transform: scale(1);   }
+  50%       { opacity: 0.3; transform: scale(0.8); }
+}
+
+/* ─── Mobile View Tabs (Top Navigation) ─── */
+.mobileViewTabs {
+  display: flex;
+  background: #252526;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  z-index: 10;
+}
+.mobileViewTab {
+  flex: 1;
+  padding: 12px 4px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.mobileViewTabActive {
+  color: var(--accent-blue);
+  border-bottom-color: var(--accent-blue);
+  background: rgba(88, 166, 255, 0.05);
+}
+.tabBadge {
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 9px;
+}
+.tabBadgeActive {
+  background: var(--accent-blue);
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE BREAKPOINT
+═══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .titlebar { justify-content: flex-start; padding: 0 10px; }
+  .clock    { display: none; }
+
+  /* Ascunde sidebar si desktop panels */
+  .desktopPanels { display: none; }
+
+  /* Activeaza mobile panels — row ca fiecare .mobilePane
+     sa ocupe toata latimea prin flex: 1 */
+  .mobilePanels {
+    display: flex;
+    flex: 1;
+    min-height: 0;       /* CRITIC: permite micsorarea in flex parent */
+    overflow: hidden;
+  }
+
+  /* Statusbar ascuns pe mobile — ocupa spatiu util */
+  .statusbar { display: none; }
+
+  /* Mobile nav bar */
+  .mobileNav {
+    display: flex;
+    background: #2d2d2d;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+    /* Safe area iPhone notch/Dynamic Island */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .mobileNavBtn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0 6px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    gap: 3px;
+    transition: color 0.15s, background 0.15s;
+    border-top: 2px solid transparent;
+    min-height: 52px;  /* touch target minim recomandat WCAG: 44px */
+    position: relative;
+  }
+  .mobileNavBtn:hover { color: var(--text-primary); }
+  .mobileNavBtn:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: -2px;
+  }
+
+  .mobileNavActive {
+    color: var(--accent-blue) !important;
+    border-top-color: var(--accent-blue);
+  }
+
+  /* ─── NOU: Clasa pentru butonul de Iesire (Mobile) ─── */
+  .mobileNavLogout {
+    color: #f44747 !important; /* Rosu pt a semnala o actiune de iesire */
+    opacity: 0.8;
+  }
+  .mobileNavLogout:hover {
+    background: rgba(244, 71, 71, 0.1);
+    opacity: 1;
+  }
+  /* ──────────────────────────────────────────────────── */
+
+  .mobileNavIcon  { font-size: 18px; line-height: 1; position: relative; }
+  .mobileNavLabel { font-size: 10px; font-family: var(--font-mono); }
+
+  /* Badge pe iconita Inspector cand e un tichet selectat */
+  .mobileNavBadge {
+    position: absolute;
+    top: -4px;
+    right: -6px;
+    font-size: 8px;
+    color: var(--accent-blue);
+    line-height: 1;
+  }
+}

@@ -1,0 +1,229 @@
+/* src/shared/styles/Login.module.css */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg);
+}
+
+.bgImage {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(4px);
+  transform: scale(1.05); /* Ascunde marginile blurate */
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(8, 15, 22, 0.85) 0%, rgba(21, 28, 35, 0.95) 100%);
+}
+
+.backLink {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: var(--gold);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  padding: 1.5rem;
+}
+
+.card {
+  background: var(--surface-mid);
+  border: 1px solid var(--surface-top);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.cardHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-family: var(--font-head);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.errorBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.errorIcon {
+  color: var(--error);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ========================================= */
+/* STILIZARE MATERIAL DESIGN FLOATING LABELS */
+/* ========================================= */
+.inputWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  transition: color 0.2s;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.input {
+  width: 100%;
+  padding: 1.5rem 1rem 0.6rem 3rem; /* Spațiu sus pt label, stânga pt iconiță */
+  background: var(--surface-low);
+  border: 1px solid var(--surface-top);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 1rem;
+  font-family: var(--font-body);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  border-color: var(--gold);
+  background: var(--surface-mid);
+  box-shadow: 0 0 0 3px rgba(233, 193, 118, 0.1);
+}
+
+.label {
+  position: absolute;
+  left: 3rem; /* Aliniat cu textul din input */
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.2s ease-out;
+  z-index: 1;
+}
+
+/* Magia CSS: Când e focusat SAU când input-ul NU e gol (nu arată placeholder-ul gol) */
+.input:focus ~ .label,
+.input:not(:placeholder-shown) ~ .label {
+  top: 14px; /* Se ridică sus */
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.inputWrapper:focus-within .label {
+  color: var(--gold); /* Se face auriu doar la focus */
+}
+
+.inputWrapper:focus-within .inputIcon {
+  color: var(--gold);
+}
+/* ========================================= */
+
+.submitBtn {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: var(--gold);
+  color: #1a1a1a;
+  font-family: var(--font-head);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(233, 193, 118, 0.2);
+}
+
+.submitBtn:disabled {
+  background: var(--surface-top);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.cardFooter {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--surface-top);
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .backLink {
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+  .card {
+    padding: 2rem 1.5rem;
+  }
+}

@@ -1,0 +1,179 @@
+/* citizen/components/Navbar.module.css */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  height: 72px;
+  background: rgba(13, 20, 27, 0.92);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+
+}
+
+.navBorder {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--surface-mid);
+}
+
+.navLeft  { display: flex; align-items: center; gap: 2.5rem; }
+.navRight { display: flex; align-items: center; gap: 1rem; }
+
+.logo {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.75rem;
+}
+
+.navLink {
+  font-family: var(--font-head);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.navLink:hover { color: var(--text); }
+
+.btnNav {
+  font-family: var(--font-head);
+  font-size: 0.88rem;
+  font-weight: 700;
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  transition: opacity 0.18s, transform 0.15s;
+}
+.btnNav:hover { opacity: 0.9; transform: scale(1.015); }
+
+/* Buton Meniu Mobil */
+.mobileMenuBtn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s;
+}
+
+.mobileMenuBtn:focus-visible {
+  outline: 2px solid var(--gold);
+  border-radius: 4px;
+}
+
+/* Overlay Meniu Mobil */
+.mobileMenu {
+  position: fixed;
+  top: 72px;
+  left: 0; right: 0;
+  background: var(--surface-low);
+  border-bottom: 1px solid var(--surface-top);
+  padding: 1.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transform: translateY(-150%);
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  z-index: 40;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.mobileMenuOpen {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobileNavLink {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.mobileNavLink:hover, .mobileNavLink:focus {
+  color: var(--gold);
+  outline: none;
+}
+
+.mobileMenuDivider {
+  height: 1px;
+  background: var(--surface-top);
+  margin: 0.5rem 0;
+}
+
+/* Responsive Navbar */
+@media (max-width: 640px) {
+  .nav { padding: 0 1.5rem; }
+  .desktopOnly { display: none !important; }
+  .mobileMenuBtn { display: block; }
+}
+
+/* --- NOU: Ascunde forțat meniul de mobil pe desktop --- */
+@media (min-width: 641px) {
+  .mobileMenu {
+    display: none !important;
+  }
+}
+
+/* Buton Deconectare (Desktop) */
+.btnLogout {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: transparent;
+  color: var(--text-muted);
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--surface-top);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnLogout:hover {
+  color: var(--on-error);
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.15); /* Roșu subtil la hover */
+}
+
+/* Buton Deconectare (Mobil) */
+.btnLogoutMobile {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  background: transparent;
+  color: var(--error);
+  padding: 0.75rem;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.btnLogoutMobile:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--on-error);
+}

@@ -1,0 +1,47 @@
+/* ─── Global CSS Variables — Dark Theme (VS Code / Unity style) ─── */
+/* Import in index.css sau main.jsx */
+
+:root {
+  /* Backgrounds */
+  --bg-primary:      #1e1e1e;
+  --bg-secondary:    #252526;
+  --bg-panel:        #2d2d2d;
+  --bg-hover:        #2a2d2e;
+  --bg-selected:     #094771;
+  --bg-selected-mid: #1a3a5c;
+
+  /* Borders */
+  --border:          #3e3e42;
+  --border-light:    #454545;
+
+  /* Text */
+  --text-primary:    #d4d4d4;
+  --text-secondary:  #858585;
+  --text-muted:      #6e6e6e;
+
+  /* Accents */
+  --accent-blue:     #007acc;
+  --accent-blue-h:   #0098ff;
+  --accent-green:    #4ec9b0;
+  --accent-yellow:   #e8a84a;
+  --accent-red:      #f44747;
+  --accent-orange:   #ce9178;
+  --accent-purple:   #c586c0;
+
+  /* Priority colors */
+  --p-critical:      #f44747;
+  --p-high:          #e8a84a;
+  --p-medium:        #007acc;
+  --p-low:           #4ec9b0;
+
+  /* Fonts */
+  --font-mono:       'JetBrains Mono', monospace;
+  --font-ui:         'Inter', sans-serif;
+
+  /* Layout */
+  --sidebar-w:       48px;
+  --queue-w:         320px;
+  --inspector-w:     290px;
+  --titlebar-h:      30px;
+  --statusbar-h:     22px;
+}

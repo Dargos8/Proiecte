@@ -1,0 +1,164 @@
+/* citizen/styles/Explore.module.css */
+.page { display: flex; flex-direction: column; height: 100vh; padding-top: 72px; background: var(--bg); }
+.container { display: flex; flex-direction: column; flex: 1; overflow: hidden; position: relative; }
+
+.sidebar {
+  flex: 1; overflow-y: auto; background: var(--surface-low); border-right: 1px solid var(--surface-top);
+  padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;
+  scrollbar-width: thin; scrollbar-color: var(--surface-top) var(--surface-low);
+  padding-bottom: 80px; /* Extra padding pe mobil ca să nu fie acoperite ultimele iteme de tab-ul hărții */
+}
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-track { background: var(--surface-low); }
+.sidebar::-webkit-scrollbar-thumb { background: var(--surface-top); border-radius: 4px; }
+
+.sidebarHeader h1 { font-family: var(--font-head); font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; }
+.sidebarHeader p { font-size: 0.88rem; color: var(--text-muted); }
+
+.filtersWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--surface-mid);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--surface-top);
+}
+
+/* NOU: Stiluri pentru bara de căutare */
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem; /* Separator subtil față de filtre */
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.85rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.65rem 1rem 0.65rem 2.2rem; /* Spațiu pentru iconiță */
+  background: var(--surface-low);
+  border: 1px solid var(--surface-top);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: var(--surface-mid);
+  box-shadow: 0 0 0 3px rgba(233, 193, 118, 0.1);
+}
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+.filterRow {
+  display: flex;
+  gap: 0.5rem;
+}
+.filterRow { display: flex; gap: 0.5rem; }
+.filterSelect { flex: 1; padding: 0.5rem; background: var(--surface-low); border: 1px solid var(--surface-top); border-radius: 4px; color: var(--text); font-family: var(--font-body); font-size: 0.85rem; }
+.filterSelect:focus { outline: none; border-color: var(--gold); }
+
+.issueList { display: flex; flex-direction: column; gap: 1rem; }
+
+.card {
+  background: var(--surface-mid); padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--surface-top);
+  transition: all 0.2s; text-decoration: none; display: block; cursor: pointer;
+}
+.card:hover, .card:focus-visible { background: var(--surface-high); transform: translateX(4px); outline: none; }
+
+.cardPopular {
+  border-left-color: var(--gold);
+  background: linear-gradient(145deg, var(--surface-mid), rgba(233, 193, 118, 0.03));
+  box-shadow: 0 4px 12px rgba(233, 193, 118, 0.08);
+}
+
+.cardTop { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+.statusBadge { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+.badgeNOU { background: rgba(233, 193, 118, 0.15); color: var(--gold); }
+.badgeIN_PROCESARE { background: rgba(183, 200, 222, 0.15); color: var(--primary); }
+.badgeREZOLVAT, .badgeRESPINS { background: var(--surface-top); color: var(--text-muted); }
+.badgePopular { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; background: var(--gold); color: #1a1a1a; display: flex; alignItems: center; gap: 4px; }
+
+.cardDate { font-size: 0.75rem; color: var(--text-muted); }
+.cardTitle { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.75rem; line-height: 1.4; }
+.cardBottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+.cardCategory, .cardUpvotes { display: flex; alignItems: center; gap: 5px; color: var(--text-muted); }
+.upvotesPopular { color: var(--gold); font-weight: 700; }
+
+/* --------------------------------- */
+/* LOGICA HĂRȚII (BOTTOM SHEET MOBIL)*/
+/* --------------------------------- */
+.mapArea {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 55vh; /* Se deschide până la jumătate de ecran */
+  background: var(--surface-low);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.3);
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+}
+
+.mapArea.collapsed {
+  transform: translateY(calc(100% - 50px)); /* Lasă 50px afară pentru buton */
+}
+
+.mapArea.expanded {
+  transform: translateY(0);
+}
+
+.mapToggleBtn {
+  height: 50px;
+  min-height: 50px;
+  background: var(--surface-mid);
+  border: none;
+  width: 100%;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.mapHandle {
+  width: 40px;
+  height: 4px;
+  background: var(--surface-top);
+  border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+  .container { flex-direction: row; }
+  .sidebar { width: 400px; flex: none; height: calc(100vh - 72px); padding-bottom: 1.5rem; }
+  
+  .mapArea { 
+    position: relative;
+    flex: 1; 
+    height: calc(100vh - 72px); 
+    transform: none !important; /* Pe desktop e mereu afișată */
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .mapToggleBtn { display: none; }
+}

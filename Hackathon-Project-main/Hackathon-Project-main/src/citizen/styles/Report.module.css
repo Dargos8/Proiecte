@@ -1,0 +1,277 @@
+/* citizen/styles/Report.module.css */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 72px;
+  background: var(--bg);
+}
+
+.container {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.header { margin-bottom: 2.5rem; }
+
+.title {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitle { color: var(--text-muted); font-size: 1.05rem; line-height: 1.5; max-width: 600px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+}
+
+.errorText {
+  color: var(--on-error); background: var(--error); padding: 1rem; border-radius: 8px;
+  font-size: 0.95rem; font-weight: 600; margin-bottom: 2rem; display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.form {
+  background: var(--surface-mid); padding: clamp(1.5rem, 4vw, 2.5rem); border-radius: 12px;
+  border: 1px solid var(--surface-top); display: grid; gap: 2.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.formSection { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.inputGroup { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.label { font-size: 0.95rem; font-weight: 600; color: var(--text); display: flex; gap: 4px; }
+.label span { color: #ef4444; }
+
+.input, .textarea, .select {
+  width: 100%; padding: 0.85rem 1rem; background: var(--surface-low); border: 1px solid var(--surface-top);
+  border-radius: 8px; color: var(--text); font-family: var(--font-body); font-size: 1rem; transition: all 0.2s ease;
+}
+
+.textarea { min-height: 140px; resize: vertical; line-height: 1.5; }
+
+.input:focus, .textarea:focus, .select:focus {
+  outline: none; border-color: var(--primary); background: var(--surface-mid); box-shadow: 0 0 0 3px rgba(183, 200, 222, 0.15);
+}
+
+/* Modificări Aici: Spațiere corectată pt Abonare */
+.subscriptionBox {
+  background: var(--surface-low);
+  border: 1px solid var(--surface-top);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkboxLabel {
+  display: flex; align-items: center; gap: 0.75rem; cursor: pointer;
+  font-size: 0.95rem; font-weight: 500; color: var(--text); user-select: none;
+}
+
+.checkboxInput { display: none; }
+
+.checkboxCustom {
+  width: 24px; height: 24px; border: 2px solid var(--surface-top); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+  color: var(--surface-low); background: var(--surface-mid); flex-shrink: 0;
+}
+
+.checkboxInput:checked + .checkboxCustom { background: var(--gold); border-color: var(--gold); color: #1a1a1a; }
+
+/* Adăugat margin-top precis aici pt separarea de checkbox */
+.emailSlideDown {
+  animation: slideDown 0.3s ease-out forwards;
+  margin-top: 1rem; 
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.emailInputWrapper { position: relative; display: flex; align-items: center; }
+
+.emailIcon { position: absolute; left: 1rem; color: var(--text-muted); font-size: 1.1rem; }
+
+.emailInput {
+  width: 100%; padding: 0.85rem 1rem 0.85rem 2.8rem; background: var(--surface-mid);
+  border: 1px solid var(--surface-top); border-radius: 8px; color: var(--text);
+  font-size: 1rem; transition: border-color 0.2s; margin: 0; /* scos orice margin rezidual */
+}
+.emailInput:focus { outline: none; border-color: var(--gold); }
+
+.mapWrapper { border-radius: 8px; overflow: hidden; border: 1px solid var(--surface-top); }
+
+.fileInputWrapper {
+  position: relative; background: var(--surface-low); border: 2px dashed var(--surface-top);
+  border-radius: 8px; padding: 2.5rem 1rem; text-align: center; cursor: pointer; transition: all 0.2s ease;
+}
+.fileInputWrapper:hover { border-color: var(--primary); background: rgba(183, 200, 222, 0.05); }
+.fileInput { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.fileInputContent { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; font-weight: 500; font-size: 0.95rem; pointer-events: none; }
+
+.formFooter {
+  grid-column: 1 / -1; display: flex; justify-content: flex-end; padding-top: 1rem; border-top: 1px solid var(--surface-top);
+}
+
+.submitBtn {
+  font-family: var(--font-head); font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;
+  background: var(--gold); color: #1a1a1a; padding: 1.1rem 2.5rem; border: none; border-radius: 8px;
+  cursor: pointer; transition: all 0.2s ease; width: 100%;
+}
+.submitBtn:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(233, 193, 118, 0.2); }
+.submitBtn:disabled { background: var(--surface-top); color: var(--text-muted); cursor: not-allowed; }
+
+/* PROXIMITY WARNING UI */
+.proximityWarning {
+  width: 100%;
+  background: rgba(217, 119, 6, 0.1); /* Portocaliu transparent */
+  border: 1px solid #d97706;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.proximityHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  color: var(--text);
+}
+
+.proximityIcon {
+  color: #d97706;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.proximityHeader strong {
+  display: block;
+  font-size: 1.05rem;
+  color: #d97706;
+  margin-bottom: 0.5rem;
+}
+
+.proximityHeader p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-style: italic;
+  margin: 0;
+}
+
+.proximityActions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.btnViewNearby {
+  background: var(--surface-top);
+  color: var(--text);
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.btnViewNearby:hover {
+  background: var(--outline);
+}
+
+.btnForceSubmit {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--outline);
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btnForceSubmit:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+@media (min-width: 860px) {
+  .form { grid-template-columns: 1fr 1fr; }
+  .submitBtn { width: auto; min-width: 250px; }
+  .proximityWarning { align-items: flex-end; }
+}
+
+@media (max-width: 640px) {
+  .form { padding: 1.5rem; }
+  .fileInputWrapper { padding: 1.5rem 1rem; }
+  .submitBtn { padding: 1rem; font-size: 1rem; }
+  .proximityActions { flex-direction: column; width: 100%; }
+  .proximityActions a, .proximityActions button { width: 100%; text-align: center; }
+}
+
+
+
+/* FOOTER */
+.footer {
+  background: var(--surface-low);
+  border-top: 1px solid var(--surface-top);
+  padding: 4rem clamp(2.5rem, 8vw, 6rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+}
+
+.footerLeft { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.footerLogo {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+}
+
+.footerCopy {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
+  align-items: center;
+}
+
+.footerLink {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footerLink:hover { color: var(--gold); text-decoration: underline; }
+
+@media (max-width: 768px) {
+  .footer { padding: 3rem 1.5rem; flex-direction: column; }
+}

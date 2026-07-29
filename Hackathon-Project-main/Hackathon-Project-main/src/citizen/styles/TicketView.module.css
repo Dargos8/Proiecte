@@ -1,0 +1,363 @@
+/* citizen/styles/TicketView.module.css */
+.page {
+  min-height: 100vh;
+  display: flex;          
+  flex-direction: column;  
+  padding-top: 72px;      
+  background: var(--bg);
+  color: var(--text);
+  /* padding-bottom: 4rem;*/
+}
+
+.container {
+  flex: 1;           
+  width: 100%;       
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--surface-top);
+  padding-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.titleBox h1 {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.meta {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badgeNOU { background: rgba(233, 193, 118, 0.15); color: var(--gold); border: 1px solid var(--gold); }
+.badgeIN_PROCESARE { background: rgba(183, 200, 222, 0.15); color: var(--primary); border: 1px solid var(--primary); }
+.badgeREZOLVAT { background: rgba(13, 20, 27, 0.5); color: var(--text-muted); border: 1px solid var(--surface-top); }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.card {
+  background: var(--surface-mid);
+  border: 1px solid var(--surface-top);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.cardTitle {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+  white-space: pre-wrap;
+}
+
+.mediaImage {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 1rem;
+  border: 1px solid var(--surface-top);
+}
+
+/* Timeline Updates */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 11px;
+  width: 2px;
+  background: var(--surface-top);
+}
+
+.updateItem {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.updateDot {
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 4px var(--surface-mid);
+}
+
+.updateDate {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.updateMessage {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+/* Upvote Button */
+.upvoteBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface-low);
+  border: 1px solid var(--outline);
+  color: var(--text);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.upvoteBtn:hover:not(:disabled) {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.upvoteBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+@media (min-width: 768px) {
+  .grid { grid-template-columns: 2fr 1fr; }
+}
+
+
+.subscribeCard {
+  background: var(--surface-low);
+  border: 1px solid var(--surface-top);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.subscribeTitle {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.subscribeDesc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.subscribeForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.subscribeInput {
+  padding: 0.75rem 1rem;
+  background: var(--surface-mid);
+  border: 1px solid var(--surface-top);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.subscribeInput:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.subscribeBtn {
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-family: var(--font-head);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.subscribeBtn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.subscribeBtn:disabled {
+  background: var(--surface-top);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.msgSuccess {
+  font-size: 0.85rem;
+  color: #4ade80; /* Verde soft */
+  background: rgba(74, 222, 128, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.msgError {
+  font-size: 0.85rem;
+  color: var(--on-error);
+  background: var(--error);
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+
+
+/* ========================================= */
+/* FIX PENTRU GRID (Să nu iasă din ecran)    */
+/* ========================================= */
+.grid > div {
+  min-width: 0;
+}
+
+/* ========================================= */
+/* STILURI PENTRU CARUSEL IMAGINI ACTUALIZAT */
+/* ========================================= */
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  max-width: 100%; /* Obligatoriu pentru a nu depăși lățimea cardului */
+  margin-top: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--surface-top);
+  background: var(--surface-low);
+}
+
+.carouselTrack {
+  display: flex;
+  flex-wrap: nowrap; /* Forțează elementele să stea pe un singur rând */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+.carouselTrack::-webkit-scrollbar {
+  display: none; 
+}
+
+.carouselImage {
+  flex: 0 0 100%; /* Asta e magia: nu crește, nu scade, ia fix 100% din lățimea vizibilă */
+  width: 100%;
+  max-height: 450px;
+  object-fit: contain; 
+  scroll-snap-align: center;
+  background: #0d141b; 
+}
+
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(13, 20, 27, 0.7);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.navBtn:hover:not(:disabled) { 
+  background: rgba(233, 193, 118, 0.9); 
+  color: #1a1a1a; 
+}
+
+.navBtn:disabled { 
+  opacity: 0; 
+  cursor: default; 
+}
+
+.prevBtn { left: 10px; }
+.nextBtn { right: 10px; }
+
+.dots {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.activeDot {
+  background: var(--gold);
+  transform: scale(1.3);
+}

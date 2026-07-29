@@ -1,0 +1,48 @@
+/* citizen/styles/Footer.module.css */
+
+.footer {
+  background: var(--surface-low);
+  border-top: 1px solid var(--surface-top);
+  padding: 4rem clamp(2.5rem, 8vw, 6rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+}
+
+.footerLeft { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.footerLogo {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+}
+
+.footerCopy {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
+  align-items: center;
+}
+
+.footerLink {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footerLink:hover { color: var(--gold); text-decoration: underline; }
+
+@media (max-width: 768px) {
+  .footer { padding: 3rem 1.5rem; flex-direction: column; }
+}

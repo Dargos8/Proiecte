@@ -1,0 +1,371 @@
+.panel {
+  width: var(--inspector-w);
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Pe mobil panoul ocupa tot spatiul disponibil */
+@media (max-width: 768px) {
+  .panel {
+    width: 100%;
+    border-left: none;
+  }
+}
+
+/* ── Empty state ── */
+.empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-family: var(--font-mono);
+}
+.emptyIcon { width: 48px; height: 48px; opacity: 0.3; }
+
+/* ── Header ── */
+.header {
+  padding: 12px 16px;
+  background: #252526; /* Un fundal o idee mai distinct */
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  /* Previne overflow care ascundea butonul PDF */
+  overflow: hidden;
+}
+.headerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+  min-width: 0;
+}
+.ticketId {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: #58a6ff;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+.headerTitle {
+  display: block;
+  font-size: 15px; /* Mărit pentru vizibilitate clară */
+  font-weight: 600;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── PDF button (ÎMBUNĂTĂȚIT) ── */
+.btnPdf {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: bold;
+  padding: 5px 10px;
+  /* Fundal semi-transparent verde-albăstrui */
+  background: rgba(78, 201, 176, 0.15); 
+  border: 1px solid rgba(78, 201, 176, 0.4);
+  color: #4ec9b0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btnPdf:hover:not(:disabled) {
+  background: #4ec9b0;
+  color: #1e1e1e; /* Text închis pe fundal luminos */
+  box-shadow: 0 0 8px rgba(78, 201, 176, 0.4);
+}
+.btnPdf:disabled { opacity: 0.4; cursor: not-allowed; }
+.btnPdfLoading { animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+
+/* ── Scrollable ── */
+.scrollable {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.scrollable::-webkit-scrollbar { width: 5px; }
+.scrollable::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── Gallery ── */
+.mediaBlock { padding: 12px 16px 0; }
+
+.mainImgWrapper {
+  position: relative;
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #111;
+  height: 180px; /* Mai înalt puțin */
+  width: 100%;
+}
+
+.mainImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s;
+}
+.mainImgWrapper:hover .mainImg { transform: scale(1.02); }
+.mainImgWrapper:active .mainImg { transform: scale(0.98); }
+
+.imgZoomHint {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.7);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 13px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.mainImgWrapper:hover .imgZoomHint { opacity: 1; }
+
+@media (max-width: 768px) {
+  .imgZoomHint { opacity: 0.85 !important; }
+}
+
+.imgBadge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* ── Thumbnail strip ── */
+.thumbStrip {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+.thumbStrip::-webkit-scrollbar { display: none; }
+
+.thumb {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  padding: 0;
+  background: #111;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.12s, border-color 0.12s;
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.thumb:hover { opacity: 0.9; }
+.thumbActive { opacity: 1 !important; border-color: #58a6ff !important; }
+
+/* ── Lightbox (Rămâne neschimbat pentru că e overlay) ── */
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 9999; display: flex; align-items: center; justify-content: center; animation: fadeIn 0.15s ease; touch-action: none; }
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+.lightboxInner { position: relative; max-width: 90vw; max-height: 90vh; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.lightboxImg { max-width: 90vw; max-height: 80vh; object-fit: contain; border-radius: 4px; border: 1px solid var(--border); box-shadow: 0 8px 40px rgba(0,0,0,0.6); user-select: none; -webkit-user-drag: none; }
+.lightboxClose { position: absolute; top: -36px; right: 0; background: transparent; border: none; color: #fff; font-size: 24px; cursor: pointer; opacity: 0.7; transition: opacity 0.12s; line-height: 1; padding: 8px; margin: -8px; }
+.lightboxClose:hover { opacity: 1; }
+.lightboxClose:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.lightboxNav { display: flex; align-items: center; gap: 16px; }
+.lightboxNavBtn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 24px; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.12s; line-height: 1; }
+.lightboxNavBtn:hover:not(:disabled) { background: rgba(255,255,255,0.2); }
+.lightboxNavBtn:disabled { opacity: 0.3; cursor: default; }
+.lightboxNavBtn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.lightboxCounter { font-family: var(--font-mono); font-size: 13px; font-weight: bold; color: rgba(255,255,255,0.9); }
+
+/* ── Info rows ── */
+.infoBlock { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+.spamCount { color: #f44747; font-family: var(--font-mono); font-size: 12px; font-weight: bold; }
+
+/* ── Sections ── */
+.section { padding: 12px 16px; }
+.sectionLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.divider { height: 1px; background: var(--border); }
+
+/* ── Description ── */
+.description {
+  font-size: 13px; /* Mărit pentru citit ușor */
+  line-height: 1.6;
+  color: #e0e0e0; /* Alb mai curat */
+  font-family: var(--font-ui);
+  word-break: break-word;
+  background: rgba(0,0,0,0.15); /* Contrast ușor pentru caseta de text */
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ── Form controls ── */
+.label {
+  display: block;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  margin: 12px 0 6px;
+}
+.select {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 13px; /* Mult mai clar */
+  padding: 8px 10px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+}
+.select:focus { border-color: #58a6ff; }
+
+/* ── Priority grid ── */
+.priorityGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.priorityBtn {
+  padding: 8px 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+  min-height: 36px;
+}
+.priorityBtn:hover { border-color: var(--border-light); color: var(--text-primary); }
+.priorityBtnActive { background: rgba(255,255,255,0.05); font-weight: bold; box-shadow: inset 0 0 0 1px currentColor; }
+
+/* ── Action buttons ── */
+.btnPrimary {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px;
+  background: #007acc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.15s;
+  letter-spacing: 0.5px;
+  min-height: 40px;
+}
+.btnPrimary:hover:not(:disabled) { background: #0098ff; }
+.btnPrimary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btnPrimary:focus-visible { outline: 2px solid #007acc; outline-offset: 2px; }
+
+.btnReject {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  color: #e8a84a;
+  border: 1px solid rgba(232,168,74,0.5);
+  border-radius: 4px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-bottom: 8px;
+  min-height: 38px;
+}
+.btnReject:hover:not(:disabled) { background: rgba(232,168,74,0.12); border-color: #e8a84a; }
+.btnReject:focus-visible { outline: 2px solid #e8a84a; outline-offset: 2px; }
+
+.btnDelete {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  color: #f44747;
+  border: 1px solid rgba(244,71,71,0.4);
+  border-radius: 4px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  min-height: 38px;
+}
+.btnDelete:hover:not(:disabled) { background: rgba(244,71,71,0.1); border-color: #f44747; }
+.btnDeleteConfirm { background: rgba(244,71,71,0.2) !important; border-color: #f44747 !important; color: #ff6b6b; font-weight: bold; }
+.btnDelete:focus-visible { outline: 2px solid #f44747; outline-offset: 2px; }
+
+.btnCancel {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 4px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.12s;
+  min-height: 32px;
+}
+.btnCancel:hover { color: var(--text-primary); border-color: var(--border-light); background: rgba(255,255,255,0.05); }
+.btnCancel:focus-visible { outline: 2px solid var(--border-light); outline-offset: 2px; }
+
+/* ── Update log ── */
+.updateLog { list-style: none; display: flex; flex-direction: column; gap: 8px; padding: 0; margin: 0; }
+.updateEntry {
+  background: rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+.updateDate {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #888;
+  margin-bottom: 4px;
+}
+.updateMsg {
+  font-size: 12px;
+  color: #ddd;
+  line-height: 1.5;
+  word-break: break-word;
+}
